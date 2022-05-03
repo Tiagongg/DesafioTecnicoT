@@ -1,14 +1,17 @@
 package com.example.apkprueba.services
 
+import com.example.apkprueba.Model.Device
+import com.example.apkprueba.Model.DeviceDetails
 import retrofit2.Callback
 
-class Repository(
+class Repository(private val webService: WebService) {
 
-    private val webServices: WebService)
-
-{
-
-    fun requestDevices(callback: Callback<WebService.GetDevices>) {
-        webServices.getDevices().enqueue(callback)
+    fun requestDevices(callback: Callback<ArrayList<Device>>) {
+        webService.getDevices().enqueue(callback)
     }
+
+    fun requestDeviceDetails(id: Int, callback: Callback<DeviceDetails>) {
+        webService.getDeviceDetails(id).enqueue(callback)
+    }
+
 }
